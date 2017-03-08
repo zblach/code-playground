@@ -1,3 +1,4 @@
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -8,6 +9,12 @@ public class DrivingDemoUnitTest {
     @BeforeMethod
     public void initCar() {
         car = new Car();
+        car.turnOn();
+    }
+
+    @AfterMethod
+    public void turnOffCar() {
+        car.turnOff();
     }
 
     @Test

@@ -22,7 +22,7 @@ public class Gearbox implements Transition {
     }
 
     public void setState(State s) {
-        System.err.printf("Manually overriding state to %s\n", s);
+        System.err.printf("Manually overriding state. %s -> %s\n", internalState, s);
         internalState = s;
     }
 }
