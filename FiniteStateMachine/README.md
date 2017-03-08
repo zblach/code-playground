@@ -1,23 +1,29 @@
 # What it is
-A bit of fun with a finite state machine.
+A bit of fun with a finite gear machine.
 
-## Transition.java
-This is an interface that defines how objects interact with state transition.
+## statemachine/Transition
+This is an interface that defines how objects interact with gear transition.
 
-## State.java
-An enumeration of available states, and the legal paths of translation from one to the other.
+## statemachine/State
+The interface that defines a state.
 
-## Gearbox.java
-A class that maintains state. Instantiable.
+## statemachine/StateContainer
+A class that maintains a state. Instantiable & changes.
 
-## Car.java
-A device with a Gearbox in it. Defines operations to perform on the gearbox to put the car in a specific state.
+## statemachine/exceptions/BadTransitionException
+The exception thrown when attempting to move between nonadjacent gears.
 
-## BadTransitionException
-The exception thrown when attempting to move between nonadjacent states.
+## demo/Gear
+An enumeration of available gears, and the legal paths of translation from one to the other.
 
-## DrivingDemoUnitTest
-Some example calls to Car methods.
+## demo/Gearbox
+An example of the StateContainer holding a gear.
+
+## demo/Car
+A device with a gearbox in it. Defines operations to perform on the gearbox to put the car in a specific gear.
+
+## test/DrivingDemoUnitTest
+Some example calls to Car.
 
 
 All copyrights reserved. Zak Blacher March 7, 2017
