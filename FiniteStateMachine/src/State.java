@@ -41,6 +41,10 @@ public enum State implements Transition {
         return prevStates;
     }
 
+    @Override public State getState() {
+        return this;
+    }
+
     private void setNextStates(State ...states) {
         for (State state: states) {
             this.nextStates.add(state);

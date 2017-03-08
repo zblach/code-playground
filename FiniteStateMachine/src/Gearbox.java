@@ -2,27 +2,27 @@ import java.util.Set;
 
 public class Gearbox implements Transition {
 
-    private State internalState = State.PARK;
+    private State gearbox = State.PARK;
 
     @Override public Gearbox moveTo(State s) {
-        internalState = internalState.moveTo(s);
+        gearbox = gearbox.moveTo(s);
         return this;
     }
 
     @Override public Set<State> nextStates() {
-        return internalState.nextStates();
+        return gearbox.nextStates();
     }
 
     @Override public Set<State> prevStates() {
-        return internalState.prevStates();
+        return gearbox.prevStates();
     }
 
-    public State getState() {
-        return internalState;
+    @Override public State getState() {
+        return gearbox;
     }
 
     public void setState(State s) {
-        System.err.printf("Manually overriding state. %s -> %s\n", internalState, s);
-        internalState = s;
+        System.err.printf("Manually overriding state. %s -> %s\n", gearbox, s);
+        gearbox = s;
     }
 }

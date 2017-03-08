@@ -4,4 +4,5 @@ public interface Transition {
     Transition moveTo(State s);
     Set<State> nextStates();
     Set<State> prevStates();
+    State getState();
 }
