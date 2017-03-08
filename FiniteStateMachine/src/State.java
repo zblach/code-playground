@@ -1,3 +1,6 @@
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,25 +26,25 @@ public enum State implements Transition {
     }
 
 
-    private final Set<State> nextStates = new HashSet<>();
-    private final Set<State> prevStates = new HashSet<>();
+    @NotNull private final Set<State> nextStates = new HashSet<>();
+    @NotNull private final Set<State> prevStates = new HashSet<>();
 
-    @Override public State moveTo(State s) throws BadTransitionException {
+    @NotNull @Override public State moveTo(@NotNull State s) throws BadTransitionException {
         if (!this.nextStates.contains(s))
             throw new BadTransitionException(this, s);
 
         return s;
     }
 
-    @Override public Set<State> nextStates() {
-        return nextStates;
+    @NotNull @Override public Set<State> nextStates() {
+        return Collections.unmodifiableSet(nextStates);
     }
 
-    @Override public Set<State> prevStates() {
-        return prevStates;
+    @NotNull @Override public Set<State> prevStates() {
+        return Collections.unmodifiableSet(prevStates);
     }
 
-    @Override public State getState() {
+    @NotNull @Override public State getState() {
         return this;
     }
 

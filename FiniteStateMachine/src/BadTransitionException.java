@@ -1,5 +1,7 @@
-public class BadTransitionException extends IllegalArgumentException {
-    public BadTransitionException(State s1, State s2) {
+import org.jetbrains.annotations.NotNull;
+
+public class BadTransitionException extends IllegalStateException {
+    public BadTransitionException(@NotNull State s1, @NotNull State s2) {
         super(String.format("Bad Transition %s -> %s", s1, s2));
     }
 }

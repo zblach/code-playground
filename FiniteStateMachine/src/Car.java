@@ -16,7 +16,7 @@ public class Car extends Gearbox {
 
         // may not be safe.
         moveTo(State.PARK);
-        this.speed = 0;
+        speed = 0;
     }
     public void idle() {
         if (!on)
@@ -43,6 +43,7 @@ public class Car extends Gearbox {
         if (getState() == State.PARK)
             return;
 
+        speed = 0;
         if (nextStates().contains(State.PARK)) {
             moveTo(State.PARK);
         } else {

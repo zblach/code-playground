@@ -1,27 +1,29 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Set;
 
 public class Gearbox implements Transition {
 
-    private State gearbox = State.PARK;
+    @NotNull private State gearbox = State.PARK;
 
-    @Override public Gearbox moveTo(State s) {
+    @NotNull @Override public final Gearbox moveTo(@NotNull State s) throws BadTransitionException {
         gearbox = gearbox.moveTo(s);
         return this;
     }
 
-    @Override public Set<State> nextStates() {
+    @NotNull @Override public final Set<State> nextStates() {
         return gearbox.nextStates();
     }
 
-    @Override public Set<State> prevStates() {
+    @NotNull @Override public final Set<State> prevStates() {
         return gearbox.prevStates();
     }
 
-    @Override public State getState() {
+    @NotNull @Override public final State getState() {
         return gearbox;
     }
 
-    public void setState(State s) {
+    protected final void setState(@NotNull State s) {
         System.err.printf("Manually overriding state. %s -> %s\n", gearbox, s);
         gearbox = s;
     }
