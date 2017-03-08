@@ -9,14 +9,12 @@ public abstract class StateContainer<T extends Enum<T> & State<T>> implements Tr
 
     @Override
     @NotNull
-    @SuppressWarnings("unchecked")
     public final Set<T> nextStates() {
         return state.nextStates();
     }
 
     @Override
     @NotNull
-    @SuppressWarnings("unchecked")
     public final Set<T> prevStates() {
         return state.prevStates();
     }
