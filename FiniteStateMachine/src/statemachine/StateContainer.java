@@ -6,34 +6,33 @@ import statemachine.exceptions.BadTransitionException;
 import java.util.EnumSet;
 
 
-public class StateContainer<T extends Enum<T> & State<T>> implements State<T> {
-    private T state;
+public class StateContainer<E extends Enum<E> & State<E>> implements State<E> {
+    private E state;
 
     @Override
-    @NotNull
-    public final EnumSet<T> nextStates() {
+    public final @NotNull EnumSet<E> nextStates() {
         return state.nextStates();
     }
 
     @Override
     @NotNull
-    public final T getState() {
+    public final E getState() {
         return state;
     }
 
-    protected final void setState(@NotNull T t) {
-        System.err.printf("Manually overriding state. %s -> %s\n", state, t);
-        state = t;
+    protected final void setState(@NotNull E state) {
+        System.err.printf("Manually overriding state. %s -> %s\n", this.state, state);
+        this.state = state;
     }
 
-    protected void moveTo(T t) throws BadTransitionException { // it would be cool if we could stack these...
-        if (!state.nextStates().contains(t))
-            throw new BadTransitionException(state, t);
+    protected final void moveTo(@NotNull E nextState) throws BadTransitionException { // it would be cool if we could stack these...
+        if (!state.nextStates().contains(nextState))
+            throw new BadTransitionException(state, nextState);
 
-        this.state = t;
+        state = nextState;
     }
 
-    protected StateContainer(T t) {
-        state = t;
+    protected StateContainer(@NotNull E initialState) {
+        state = initialState;
     }
 }

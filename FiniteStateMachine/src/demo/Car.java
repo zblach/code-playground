@@ -1,6 +1,6 @@
 package demo;
 
-public class Car extends Gearbox{
+public class Car extends Gearbox {
 
     private int speed = 0;
     private boolean on = false;
@@ -39,7 +39,7 @@ public class Car extends Gearbox{
             moveTo(Gear.REVERSE);
             this.speed = -5;
         } else {
-            throw new RuntimeException(String.format("Cannot reverse from here. demo.Gear: %s", getState()));
+            throw new RuntimeException(String.format("Cannot reverse from state: %s", getState()));
         }
     }
 

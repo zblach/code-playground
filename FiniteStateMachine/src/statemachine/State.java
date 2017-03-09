@@ -5,8 +5,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.EnumSet;
 
 
-public interface State<T extends Enum<T> & State<T>> {
-    @NotNull EnumSet<T> nextStates();
-    @NotNull T getState();
+public interface State<E extends Enum<E> & State<E>> {
+    @NotNull EnumSet<E> nextStates();
+    @NotNull E getState();
 }
 
