@@ -1,8 +1,5 @@
 # What it is
-A bit of fun with a finite gear machine.
-
-## statemachine/Transition
-This is an interface that defines how objects interact with gear transition.
+A bit of fun with a finite state machine.
 
 ## statemachine/State
 The interface that defines a state.
@@ -11,10 +8,10 @@ The interface that defines a state.
 A class that maintains a state. Instantiable & changes.
 
 ## statemachine/exceptions/BadTransitionException
-The exception thrown when attempting to move between nonadjacent gears.
+The exception thrown when attempting to move between incompatible states.
 
 ## demo/Gear
-An enumeration of available gears, and the legal paths of translation from one to the other.
+An enumeration of available gears, and the legal paths from one to the other.
 
 ## demo/Gearbox
 An example of the StateContainer holding a gear.

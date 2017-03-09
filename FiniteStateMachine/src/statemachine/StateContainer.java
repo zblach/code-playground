@@ -1,22 +1,18 @@
 package statemachine;
 
 import org.jetbrains.annotations.NotNull;
+import statemachine.exceptions.BadTransitionException;
 
-import java.util.Set;
+import java.util.EnumSet;
 
-public abstract class StateContainer<T extends Enum<T> & State<T>> implements Transition<T> {
+
+public class StateContainer<T extends Enum<T> & State<T>> implements State<T> {
     private T state;
 
     @Override
     @NotNull
-    public final Set<T> nextStates() {
+    public final EnumSet<T> nextStates() {
         return state.nextStates();
-    }
-
-    @Override
-    @NotNull
-    public final Set<T> prevStates() {
-        return state.prevStates();
     }
 
     @Override
@@ -30,10 +26,11 @@ public abstract class StateContainer<T extends Enum<T> & State<T>> implements Tr
         state = t;
     }
 
-    @SuppressWarnings("unchecked")
-    public <U extends Transition<T>> U moveTo(T t) {
-        this.state = state.moveTo(t);
-        return (U) this;
+    protected void moveTo(T t) throws BadTransitionException { // it would be cool if we could stack these...
+        if (!state.nextStates().contains(t))
+            throw new BadTransitionException(state, t);
+
+        this.state = t;
     }
 
     protected StateContainer(T t) {

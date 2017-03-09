@@ -1,6 +1,7 @@
 package demo;
 
-public class Car extends Gearbox {
+public class Car extends Gearbox{
+
     private int speed = 0;
     private boolean on = false;
 
@@ -9,7 +10,8 @@ public class Car extends Gearbox {
         if (!on)
             return;
 
-        moveTo(Gear.NEUTRAL).moveTo(Gear.DRIVE);
+        moveTo(Gear.NEUTRAL);
+        moveTo(Gear.DRIVE);
         this.speed = speed;
     }
     public void park() {
