@@ -21,7 +21,7 @@ public class DrivingDemoUnitTest {
 
     @Test
     public void testDrive() {
-        car.drive(50);
+        car.drive(90);
     }
 
     @Test(expectedExceptions = BadTransitionException.class)
@@ -31,19 +31,19 @@ public class DrivingDemoUnitTest {
 
     @Test(expectedExceptions = BadTransitionException.class)
     public void testBadTransition() {
-        car.drive(50);
+        car.drive(100);
         car.park();
     }
 
     @Test
     public void testDoubleDrive() {
         car.drive(50);
-        car.drive(50);
+        car.drive(35);
     }
 
     @Test(expectedExceptions = RuntimeException.class)
     public void testDriveToReverse() {
-        car.drive(50);
+        car.drive(40);
         car.reverse();
     }
 }

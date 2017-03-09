@@ -20,19 +20,20 @@ public class StateContainer<E extends Enum<E> & State<E>> implements State<E> {
         return state;
     }
 
-    protected final void setState(@NotNull E state) {
+    public final void setState(@NotNull E state) {
         System.err.printf("Manually overriding state. %s -> %s\n", this.state, state);
         this.state = state;
     }
 
-    protected final void moveTo(@NotNull E nextState) throws BadTransitionException { // it would be cool if we could stack these...
+    public final StateContainer<E> moveTo(@NotNull E nextState) throws BadTransitionException {
         if (!state.nextStates().contains(nextState))
             throw new BadTransitionException(state, nextState);
 
         state = nextState;
+        return this;
     }
 
-    protected StateContainer(@NotNull E initialState) {
+    public StateContainer(@NotNull E initialState) {
         state = initialState;
     }
 }

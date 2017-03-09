@@ -1,6 +1,7 @@
 package demo;
 
-public class Car extends Gearbox {
+public class Car {
+    private Gearbox gearbox = new Gearbox();
 
     private int speed = 0;
     private boolean on = false;
@@ -10,8 +11,7 @@ public class Car extends Gearbox {
         if (!on)
             return;
 
-        moveTo(Gear.NEUTRAL);
-        moveTo(Gear.DRIVE);
+        gearbox.moveTo(Gear.NEUTRAL).moveTo(Gear.DRIVE);
         this.speed = speed;
     }
     public void park() {
@@ -19,39 +19,39 @@ public class Car extends Gearbox {
             return;
 
         // may not be safe.
-        moveTo(Gear.PARK);
+        gearbox.moveTo(Gear.PARK);
         speed = 0;
     }
     public void idle() {
         if (!on)
             return;
 
-        moveTo(Gear.NEUTRAL);
+        gearbox.moveTo(Gear.NEUTRAL);
     }
     public void reverse() {
         if (!on)
             return;
 
-        if (getState() == Gear.REVERSE) {
+        if (gearbox.getState() == Gear.REVERSE) {
             return;
         }
-        if (nextStates().contains(Gear.REVERSE)) {
-            moveTo(Gear.REVERSE);
+        if (gearbox.nextStates().contains(Gear.REVERSE)) {
+            gearbox.moveTo(Gear.REVERSE);
             this.speed = -5;
         } else {
-            throw new RuntimeException(String.format("Cannot reverse from state: %s", getState()));
+            throw new RuntimeException(String.format("Cannot reverse from state: %s", gearbox.getState()));
         }
     }
 
     private void forcePark() {
-        if (getState() == Gear.PARK)
+        if (gearbox.getState() == Gear.PARK)
             return;
 
         speed = 0;
-        if (nextStates().contains(Gear.PARK)) {
-            moveTo(Gear.PARK);
+        if (gearbox.nextStates().contains(Gear.PARK)) {
+            gearbox.moveTo(Gear.PARK);
         } else {
-            setState(Gear.PARK);
+            gearbox.setState(Gear.PARK);
         }
     }
 
