@@ -2,11 +2,9 @@ package statemachine;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.EnumSet;
+import java.util.Set;
 
 
-public interface State<E extends Enum<E> & State<E>> {
-    @NotNull EnumSet<E> nextStates();
-    @NotNull E getState();
+public interface State<T extends State<T>> {
+    @NotNull Set<T> nextStates();
 }
-

@@ -3,18 +3,27 @@ package statemachine;
 import org.jetbrains.annotations.NotNull;
 import statemachine.exceptions.BadTransitionException;
 
-import java.util.EnumSet;
+import java.util.Set;
+
+import static statemachine.exceptions.BadTransitionException.badTransitionException;
 
 
-public class StateContainer<E extends Enum<E> & State<E>> implements State<E> {
+/**
+ * A machine that has states of type {@code E} and knows its current state.
+ * It can transition between states, and will throw a {@link BadTransitionException}
+ * if an invalid transition is attempted.
+ */
+public class StateMachine<E extends State<E>> {
     private E state;
 
-    @Override
-    public final @NotNull EnumSet<E> nextStates() {
+    public StateMachine(@NotNull E initialState) {
+        state = initialState;
+    }
+
+    public final @NotNull Set<E> nextStates() {
         return state.nextStates();
     }
 
-    @Override
     @NotNull
     public final E getState() {
         return state;
@@ -40,15 +49,12 @@ public class StateContainer<E extends Enum<E> & State<E>> implements State<E> {
      * @return this object itself. This supports the chaining of move states.
      * @throws BadTransitionException if we attempt to move to a state that isn't nextable from here.
      */
-    public final StateContainer<E> moveTo(@NotNull E nextState) throws BadTransitionException {
-        if (!state.nextStates().contains(nextState))
-            throw new BadTransitionException(state, nextState);
+    public final StateMachine<E> moveTo(@NotNull E nextState) throws BadTransitionException {
+        if (!state.nextStates().contains(nextState)) {
+            throw badTransitionException(state, nextState);
+        }
 
         state = nextState;
         return this;
-    }
-
-    public StateContainer(@NotNull E initialState) {
-        state = initialState;
     }
 }

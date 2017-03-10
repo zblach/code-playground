@@ -35,12 +35,8 @@ public class Car {
         if (gearbox.getState() == Gear.REVERSE) {
             return;
         }
-        if (gearbox.nextStates().contains(Gear.REVERSE)) {
-            gearbox.moveTo(Gear.REVERSE);
-            this.speed = -5;
-        } else {
-            throw new RuntimeException(String.format("Cannot reverse from state: %s", gearbox.getState()));
-        }
+        gearbox.moveTo(Gear.REVERSE);
+        this.speed = -5;
     }
 
     private void forcePark() {
