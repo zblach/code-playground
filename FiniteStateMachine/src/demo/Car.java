@@ -35,6 +35,7 @@ public class Car {
         if (gearbox.getState() == Gear.REVERSE) {
             return;
         }
+
         if (gearbox.getState().nextStates().contains(Gear.REVERSE)) {
             gearbox.shift(Gear.REVERSE);
             this.speed = -5;

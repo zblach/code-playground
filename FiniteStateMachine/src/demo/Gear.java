@@ -3,30 +3,30 @@ package demo;
 import org.jetbrains.annotations.NotNull;
 import statemachine.State;
 
-import java.util.*;
+import java.util.*; // need to fix IDE setting later
 /*
 public enum Gear implements State<Gear> {
     PARK {
         @Override
-        public @NotNull EnumSet<Gear> nextStates() {
+        public @NotNull Set<Gear> nextStates() {
             return EnumSet.of(NEUTRAL, REVERSE);
         }
     },
     NEUTRAL {
         @Override
-        public @NotNull EnumSet<Gear> nextStates() {
+        public @NotNull Set<Gear> nextStates() {
             return EnumSet.of(PARK, REVERSE, DRIVE);
         }
     },
     REVERSE {
         @Override
-        public @NotNull EnumSet<Gear> nextStates() {
+        public @NotNull Set<Gear> nextStates() {
             return EnumSet.of(NEUTRAL, PARK);
         }
     },
     DRIVE {
         @Override
-        public @NotNull EnumSet<Gear> nextStates() {
+        public @NotNull Set<Gear> nextStates() {
             return EnumSet.of(NEUTRAL);
         }
     };

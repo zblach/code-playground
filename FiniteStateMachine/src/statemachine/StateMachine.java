@@ -3,7 +3,14 @@ package statemachine;
 import org.jetbrains.annotations.NotNull;
 import statemachine.exceptions.BadTransitionException;
 
+import java.util.Set;
 
+
+/**
+ * A machine that has states of type {@code E} and knows its current state.
+ * It can transition between states, and will throw a {@link BadTransitionException}
+ * if an invalid transition is attempted.
+ */
 public class StateMachine<E extends State<E>> {
     private E state;
 
@@ -37,8 +44,9 @@ public class StateMachine<E extends State<E>> {
      * @throws BadTransitionException if we attempt to move to a state that isn't nextable from here.
      */
     public final StateMachine<E> moveTo(@NotNull E nextState) throws BadTransitionException {
-        if (!state.nextStates().contains(nextState))
+        if (!state.nextStates().contains(nextState)) {
             throw new BadTransitionException(state, nextState);
+        }
 
         state = nextState;
         return this;
