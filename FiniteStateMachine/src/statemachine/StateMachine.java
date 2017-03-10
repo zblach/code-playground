@@ -5,8 +5,6 @@ import statemachine.exceptions.BadTransitionException;
 
 import java.util.Set;
 
-import static statemachine.exceptions.BadTransitionException.badTransitionException;
-
 
 /**
  * A machine that has states of type {@code E} and knows its current state.
@@ -20,6 +18,7 @@ public class StateMachine<E extends State<E>> {
         state = initialState;
     }
 
+    /** Convenience method for calling {@link #getState()}.{@link State#nextStates() nextStates()} */
     public final @NotNull Set<E> nextStates() {
         return state.nextStates();
     }
@@ -51,7 +50,7 @@ public class StateMachine<E extends State<E>> {
      */
     public final StateMachine<E> moveTo(@NotNull E nextState) throws BadTransitionException {
         if (!state.nextStates().contains(nextState)) {
-            throw badTransitionException(state, nextState);
+            throw new BadTransitionException(state, nextState);
         }
 
         state = nextState;
