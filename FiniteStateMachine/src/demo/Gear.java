@@ -32,8 +32,4 @@ public enum Gear implements State<Gear> {
     };
 
     public static final Gear INITIAL_STATE = Gear.PARK;
-
-    @NotNull @Override public Gear getState() {
-        return this;
-    }
 }

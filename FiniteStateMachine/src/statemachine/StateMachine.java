@@ -3,18 +3,10 @@ package statemachine;
 import org.jetbrains.annotations.NotNull;
 import statemachine.exceptions.BadTransitionException;
 
-import java.util.EnumSet;
 
-
-public class StateContainer<E extends Enum<E> & State<E>> implements State<E> {
+public class StateMachine<E extends Enum<E> & State<E>> {
     private E state;
 
-    @Override
-    public final @NotNull EnumSet<E> nextStates() {
-        return state.nextStates();
-    }
-
-    @Override
     @NotNull
     public final E getState() {
         return state;
@@ -40,7 +32,7 @@ public class StateContainer<E extends Enum<E> & State<E>> implements State<E> {
      * @return this object itself. This supports the chaining of move states.
      * @throws BadTransitionException if we attempt to move to a state that isn't nextable from here.
      */
-    public final StateContainer<E> moveTo(@NotNull E nextState) throws BadTransitionException {
+    public final StateMachine<E> moveTo(@NotNull E nextState) throws BadTransitionException {
         if (!state.nextStates().contains(nextState))
             throw new BadTransitionException(state, nextState);
 
@@ -48,7 +40,7 @@ public class StateContainer<E extends Enum<E> & State<E>> implements State<E> {
         return this;
     }
 
-    public StateContainer(@NotNull E initialState) {
+    public StateMachine(@NotNull E initialState) {
         state = initialState;
     }
 }
