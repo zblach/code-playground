@@ -4,8 +4,12 @@ import org.jetbrains.annotations.NotNull;
 import statemachine.exceptions.BadTransitionException;
 
 
-public class StateMachine<E extends Enum<E> & State<E>> {
+public class StateMachine<E extends State<E>> {
     private E state;
+
+    public StateMachine(@NotNull E initialState) {
+        state = initialState;
+    }
 
     @NotNull
     public final E getState() {
@@ -38,9 +42,5 @@ public class StateMachine<E extends Enum<E> & State<E>> {
 
         state = nextState;
         return this;
-    }
-
-    public StateMachine(@NotNull E initialState) {
-        state = initialState;
     }
 }
