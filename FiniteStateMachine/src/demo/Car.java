@@ -15,10 +15,10 @@ public class Car {
         this.speed = speed;
     }
     public void park() {
+        // may not be safe.
         if (!on)
             return;
 
-        // may not be safe.
         gearbox.moveTo(Gear.PARK);
         speed = 0;
     }

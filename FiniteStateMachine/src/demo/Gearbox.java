@@ -2,8 +2,8 @@ package demo;
 
 import statemachine.StateContainer;
 
-public class Gearbox extends StateContainer<Gear> {
-    protected Gearbox() {
+final class Gearbox extends StateContainer<Gear> {
+    Gearbox() {
         super(Gear.INITIAL_STATE);
     }
 }
