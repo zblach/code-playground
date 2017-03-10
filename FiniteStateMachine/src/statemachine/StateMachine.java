@@ -18,11 +18,6 @@ public class StateMachine<E extends State<E>> {
         state = initialState;
     }
 
-    /** Convenience method for calling {@link #getState()}.{@link State#nextStates() nextStates()} */
-    public final @NotNull Set<E> nextStates() {
-        return state.nextStates();
-    }
-
     @NotNull
     public final E getState() {
         return state;

@@ -17,6 +17,7 @@ public class DrivingDemoUnitTest {
     @AfterMethod
     public void turnOffCar() {
         car.turnOff();
+        System.err.printf("Shifts: %d\n", car.getShifts());
     }
 
     @Test

@@ -11,7 +11,7 @@ public class Car {
         if (!on)
             return;
 
-        gearbox.moveTo(Gear.NEUTRAL).moveTo(Gear.DRIVE);
+        gearbox.shift(Gear.NEUTRAL).shift(Gear.DRIVE);
         this.speed = speed;
     }
     public void park() {
@@ -19,14 +19,14 @@ public class Car {
         if (!on)
             return;
 
-        gearbox.moveTo(Gear.PARK);
+        gearbox.shift(Gear.PARK);
         speed = 0;
     }
     public void idle() {
         if (!on)
             return;
 
-        gearbox.moveTo(Gear.NEUTRAL);
+        gearbox.shift(Gear.NEUTRAL);
     }
     public void reverse() {
         if (!on)
@@ -35,8 +35,13 @@ public class Car {
         if (gearbox.getState() == Gear.REVERSE) {
             return;
         }
-        gearbox.moveTo(Gear.REVERSE);
-        this.speed = -5;
+
+        if (gearbox.getState().nextStates().contains(Gear.REVERSE)) {
+            gearbox.shift(Gear.REVERSE);
+            this.speed = -5;
+        } else {
+            throw new RuntimeException(String.format("Cannot reverse from state: %s", gearbox.getState()));
+        }
     }
 
     private void forcePark() {
@@ -44,8 +49,8 @@ public class Car {
             return;
 
         speed = 0;
-        if (gearbox.nextStates().contains(Gear.PARK)) {
-            gearbox.moveTo(Gear.PARK);
+        if (gearbox.getState().nextStates().contains(Gear.PARK)) {
+            gearbox.shift(Gear.PARK);
         } else {
             gearbox.setState(Gear.PARK);
         }
@@ -63,5 +68,9 @@ public class Car {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public int getShifts() {
+        return gearbox.getShifts();
     }
 }
