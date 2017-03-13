@@ -1,4 +1,4 @@
-package demo;
+package demo.car;
 
 public class Car {
     private Gearbox gearbox = new Gearbox();
@@ -52,7 +52,7 @@ public class Car {
         if (gearbox.getState().nextStates().contains(Gear.PARK)) {
             gearbox.shift(Gear.PARK);
         } else {
-            gearbox.setState(Gear.PARK);
+            gearbox.forceGear(Gear.PARK);
         }
     }
 

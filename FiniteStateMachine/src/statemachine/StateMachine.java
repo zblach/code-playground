@@ -11,7 +11,7 @@ import java.util.Set;
  * It can transition between states, and will throw a {@link BadTransitionException}
  * if an invalid transition is attempted.
  */
-public class StateMachine<E extends State<E>> {
+public class StateMachine<E extends Enum<E> & State<E>> {
     private E state;
 
     public StateMachine(@NotNull E initialState) {
@@ -31,7 +31,7 @@ public class StateMachine<E extends State<E>> {
      *
      * @param state: The state to be set.
      */
-    public final void setState(@NotNull E state) {
+    protected final void setState(@NotNull E state) {
         System.err.printf("Manually overriding state. %s -> %s\n", this.state, state);
         this.state = state;
     }
@@ -43,7 +43,7 @@ public class StateMachine<E extends State<E>> {
      * @return this object itself. This supports the chaining of move states.
      * @throws BadTransitionException if we attempt to move to a state that isn't nextable from here.
      */
-    public final StateMachine<E> moveTo(@NotNull E nextState) throws BadTransitionException {
+    protected final StateMachine<E> moveTo(@NotNull E nextState) throws BadTransitionException {
         if (!state.nextStates().contains(nextState)) {
             throw new BadTransitionException(state, nextState);
         }
